@@ -43,6 +43,16 @@ const GOOGLE_API_KEY = process.env.GOOGLE_GEOCODING_API;
 const MONGODB=process.env.MONGODB;
 
 // CORS MUST BE FIRST! 
+app.use(cors({ 
+  origin: true, // Allow all origins temporarily 
+  credentials: true, 
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'HEAD', 'PATCH'], 
+  allowedHeaders: ['*'], 
+  exposedHeaders: ['*'], 
+  optionsSuccessStatus: 200, 
+  preflightContinue: false 
+}));
+
 // Manual CORS setup (more reliable than cors package) 
 app.use((req, res, next) => { 
   res.header('Access-Control-Allow-Origin', 'https://agile-lifecare.vercel.app'); 
