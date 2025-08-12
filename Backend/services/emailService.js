@@ -41,6 +41,7 @@ const formatDate = (date) => {
 
 // Send verification email to user
 const sendVerificationEmail = async (consultation) => {
+  console.log(process.env.FRONTEND_URL);
   const verificationUrl = `${process.env.FRONTEND_URL}/verify-consultation/${consultation.verificationToken}`;
   const cancelUrl = `${process.env.FRONTEND_URL}/cancel-consultation/${consultation.verificationToken}`;
   
