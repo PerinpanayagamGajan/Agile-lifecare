@@ -2628,7 +2628,7 @@ process.on('unhandledRejection', (err) => {
 });
 
 // Start server
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 if (!PORT) {
   console.error('Error: PORT environment variable is not defined');
   process.exit(1); // Fail if PORT is undefined
