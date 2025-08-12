@@ -42,29 +42,17 @@ const secretKey = process.env.SECRETKEY;
 const GOOGLE_API_KEY = process.env.GOOGLE_GEOCODING_API;
 const MONGODB=process.env.MONGODB;
 
-// CORS MUST BE FIRST! 
-app.use(cors({ 
-  origin: true, // Allow all origins temporarily 
-  credentials: true, 
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'HEAD', 'PATCH'], 
-  allowedHeaders: ['*'], 
-  exposedHeaders: ['*'], 
-  optionsSuccessStatus: 200, 
-  preflightContinue: false 
+// Configure CORS to allow requests from your Vercel frontend
+app.use(cors({
+  origin: 'https://agile-lifecare.vercel.app', // Specify the exact frontend origin
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+  credentials: true, // Allow credentials (if needed)
+  optionsSuccessStatus: 200 // For legacy browsers
 }));
 
-// Manual CORS setup (more reliable than cors package) 
-app.use((req, res, next) => { 
-  res.header('Access-Control-Allow-Origin', 'https://agile-lifecare.vercel.app'); 
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS'); 
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization'); 
-  res.header('Access-Control-Allow-Credentials', 'true'); 
-  // Handle preflight OPTIONS request 
-  if (req.method === 'OPTIONS') { 
-    return res.sendStatus(200); 
-  } 
-  next(); 
-});
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
 
