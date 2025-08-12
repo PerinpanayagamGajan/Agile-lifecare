@@ -26,3 +26,6 @@ dist-ssr
 
 .env
 Backend/.env
+backend/.env
+Frontend/.env
+frontend/.env
