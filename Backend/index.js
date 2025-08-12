@@ -2636,5 +2636,5 @@ if (!PORT) {
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`process.env.PORT is: ${PORT}`);
-  console.log('Memory usage:', process.memoryUsage());
+  
 });
