@@ -120,7 +120,7 @@ const uploadMedicalRecords = multer({
 // Multer storage for prescriptions
 const prescriptionStorage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/prescriptions'); 
+    cb(null, 'Uploads/prescriptions'); 
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
