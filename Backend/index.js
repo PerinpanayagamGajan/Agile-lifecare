@@ -44,7 +44,12 @@ const MONGODB=process.env.MONGODB;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({
+  origin:[ 'https://agile-lifecare.vercel.app/',
+  'http://localhost:5173',
+  '*'],
+  credentials:true // Allow all origins for development, adjust as needed for production
+}));
 
 // Serve static files for uploads
 app.use('/uploads', express.static(path.join(__dirname, 'Uploads')));
