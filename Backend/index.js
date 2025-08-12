@@ -2613,8 +2613,14 @@ app.get('/getproductsbill', async (req, res) => {
   }
 });
 
-// Start the server
-const PORT = process.env.PORT || 3000;
+// Health check endpoint for debugging
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'OK', port: process.env.PORT });
+});
+
+// Start server
+const PORT = process.env.PORT; // No fallback to prevent binding to wrong port
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server is running on por ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
+  console.log(`process.env.PORT is: ${process.env.PORT}`);
 });
