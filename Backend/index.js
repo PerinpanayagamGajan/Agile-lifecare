@@ -800,6 +800,7 @@ app.post('/saveorder', authenticateJWT, async (req, res) => {
 app.post('/book-consultation', authenticateJWT, uploadMedicalRecords, async (req, res) => {
   try {
     const email = req.user.email;
+    console.log(email);
     const { user, patient, location, slot } = req.body;
     
     if (!user || !patient || !location || !slot || !req.file) {
@@ -892,7 +893,7 @@ app.post('/book-consultation', authenticateJWT, uploadMedicalRecords, async (req
 app.get('/verify-consultation/:token', async (req, res) => {
   try {
     const { token } = req.params;
-
+    console.log(token);
     // Find consultation by verification token
     const consultation = await Consultation.findOne({
       verificationToken: token,
