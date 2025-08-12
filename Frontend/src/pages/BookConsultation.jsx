@@ -76,7 +76,7 @@ const BookConsultation = () => {
     const fetchSuggestions = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/autocomplete?input=${encodeURIComponent(searchQuery)}`
+          `${api}/api/autocomplete?input=${encodeURIComponent(searchQuery)}`
         );
         console.log('API Response:', response.data);
         if (response.data.status === 'OK') {
@@ -108,7 +108,7 @@ const BookConsultation = () => {
 const fetchPlaceDetails = async (placeId) => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/api/place-details?place_id=${encodeURIComponent(placeId)}`
+      `${api}/api/place-details?place_id=${encodeURIComponent(placeId)}`
     );
     if (response.data.status === 'OK') {
       const { lat, lng } = response.data.result.geometry.location;
