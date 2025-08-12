@@ -42,19 +42,18 @@ const secretKey = process.env.SECRETKEY;
 const GOOGLE_API_KEY = process.env.GOOGLE_GEOCODING_API;
 const MONGODB=process.env.MONGODB;
 
-// Configure CORS to allow requests from your Vercel frontend
+// CORS configuration
 app.use(cors({
-  origin: 'https://agile-lifecare.vercel.app', // Specify the exact frontend origin
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
-  credentials: true, // Allow credentials (if needed)
-  optionsSuccessStatus: 200 // For legacy browsers
+  origin: 'https://agile-lifecare.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 200
 }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json()); 
-app.use(express.urlencoded({ extended: true }));
+
 
 // Serve static files for uploads
 app.use('/uploads', express.static(path.join(__dirname, 'Uploads')));
@@ -2618,9 +2617,24 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'OK', port: process.env.PORT });
 });
 
+// Error handlers for debugging
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
+  process.exit(1);
+});
+process.on('unhandledRejection', (err) => {
+  console.error('Unhandled Rejection:', err);
+  process.exit(1);
+});
+
 // Start server
-const PORT = process.env.PORT; // No fallback to prevent binding to wrong port
+const PORT = process.env.PORT;
+if (!PORT) {
+  console.error('Error: PORT environment variable is not defined');
+  process.exit(1); // Fail if PORT is undefined
+}
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
-  console.log(`process.env.PORT is: ${process.env.PORT}`);
+  console.log(`process.env.PORT is: ${PORT}`);
+  
 });
